@@ -771,7 +771,7 @@
         color: var(--secondary-color);
       }
 
-      /* Enhanced Modal Styles */
+      /* Enhanced Modal Styles - Complete Fix */
       .modal {
         display: none;
         position: fixed;
@@ -782,30 +782,33 @@
         background-color: rgba(0, 0, 0, 0.8);
         z-index: 1000;
         overflow-y: auto;
-        padding: 20px 0;
+        padding: 20px;
+        box-sizing: border-box;
       }
 
       .modal-content {
         position: relative;
         background-color: white;
-        margin: 20px auto;
+        margin: 0 auto;
         padding: 0;
-        width: 95%;
+        width: 100%;
         max-width: 1000px;
         border-radius: 15px;
-        max-height: 90vh;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: row;
+        min-height: 500px;
       }
 
       .close-modal {
         position: absolute;
-        right: 20px;
-        top: 20px;
+        right: 15px;
+        top: 15px;
         font-size: 28px;
         cursor: pointer;
         color: white;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.7);
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -817,14 +820,13 @@
       }
 
       .close-modal:hover {
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.9);
         transform: scale(1.1);
       }
 
       .modal-body {
         display: flex;
-        gap: 0;
-        height: auto;
+        width: 100%;
         min-height: 500px;
       }
 
@@ -841,7 +843,7 @@
       .modal-image img {
         width: 100%;
         height: auto;
-        max-height: 500px;
+        max-height: 400px;
         object-fit: contain;
         border-radius: 10px;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -855,8 +857,10 @@
       .modal-info {
         flex: 1;
         padding: 30px;
+        display: flex;
+        flex-direction: column;
         overflow-y: auto;
-        max-height: 500px;
+        max-height: none;
       }
 
       .modal-info h3 {
@@ -865,6 +869,7 @@
         font-size: 1.8rem;
         border-bottom: 3px solid var(--secondary-color);
         padding-bottom: 10px;
+        flex-shrink: 0;
       }
 
       .modal-description {
@@ -872,10 +877,12 @@
         margin-bottom: 25px;
         line-height: 1.7;
         font-size: 1rem;
+        flex-shrink: 0;
       }
 
       .modal-specs {
         margin-bottom: 25px;
+        flex: 1;
       }
 
       .modal-specs h4 {
@@ -887,16 +894,19 @@
       .modal-specs ul {
         list-style: none;
         padding: 0;
+        margin: 0;
       }
 
       .modal-specs li {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         color: var(--text-color);
-        padding: 8px 0;
+        padding: 10px 0;
         border-bottom: 1px solid #eee;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 10px;
+        font-size: 0.95rem;
+        line-height: 1.5;
       }
 
       .modal-specs li:before {
@@ -904,6 +914,8 @@
         color: var(--secondary-color);
         font-weight: bold;
         font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
       }
 
       .modal-contact {
@@ -911,6 +923,8 @@
         padding: 20px;
         border-radius: 10px;
         border: 2px solid var(--secondary-color);
+        margin-top: auto;
+        flex-shrink: 0;
       }
 
       .modal-contact h4 {
@@ -931,6 +945,7 @@
       .modal-contact i {
         color: var(--secondary-color);
         width: 20px;
+        flex-shrink: 0;
       }
 
       .whatsapp-btn {
@@ -946,6 +961,8 @@
         transition: all 0.3s ease;
         font-weight: 600;
         font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
       }
 
       .whatsapp-btn:hover {
@@ -956,101 +973,29 @@
         text-decoration: none;
       }
 
-      /* Full-screen image view */
-      .image-fullscreen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 2000;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        cursor: zoom-out;
-      }
-
-      .image-fullscreen img {
-        max-width: 95%;
-        max-height: 95%;
-        object-fit: contain;
-        border-radius: 10px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      }
-
-      .fullscreen-close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: white;
-        font-size: 30px;
-        cursor: pointer;
-        background: rgba(0, 0, 0, 0.7);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-      }
-
-      .fullscreen-close:hover {
-        background: rgba(0, 0, 0, 0.9);
-        transform: scale(1.1);
-      }
-
       /* Responsive Modal */
       @media (max-width: 768px) {
+        .modal {
+          padding: 0;
+        }
+
         .modal-content {
-          width: 98%;
-          margin: 10px auto;
-          max-height: 95vh;
+          width: 100%;
+          height: 100vh;
+          border-radius: 0;
+          flex-direction: column;
+          max-width: none;
         }
 
         .modal-body {
           flex-direction: column;
+          height: 100%;
         }
 
         .modal-image {
+          flex: none;
+          height: 250px;
           padding: 20px;
-          max-height: 300px;
-        }
-
-        .modal-image img {
-          max-height: 250px;
-        }
-
-        .modal-info {
-          padding: 20px;
-          max-height: none;
-        }
-
-        .modal-info h3 {
-          font-size: 1.4rem;
-        }
-
-        .close-modal {
-          right: 15px;
-          top: 15px;
-          width: 35px;
-          height: 35px;
-          font-size: 24px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .modal-content {
-          width: 100%;
-          margin: 0;
-          border-radius: 0;
-          max-height: 100vh;
-        }
-
-        .modal-image {
-          padding: 15px;
-          max-height: 250px;
         }
 
         .modal-image img {
@@ -1058,12 +1003,102 @@
         }
 
         .modal-info {
-          padding: 15px;
+          flex: 1;
+          padding: 20px;
+          overflow-y: auto;
+          height: calc(100vh - 250px);
+        }
+
+        .modal-info h3 {
+          font-size: 1.4rem;
+          margin-bottom: 15px;
+        }
+
+        .modal-description {
+          font-size: 0.9rem;
+          margin-bottom: 20px;
+        }
+
+        .modal-specs li {
+          font-size: 0.85rem;
+          padding: 8px 0;
+          margin-bottom: 10px;
         }
 
         .modal-contact {
           padding: 15px;
+          margin-top: 20px;
         }
+
+        .close-modal {
+          right: 10px;
+          top: 10px;
+          width: 35px;
+          height: 35px;
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .modal-image {
+          height: 200px;
+          padding: 15px;
+        }
+
+        .modal-image img {
+          max-height: 150px;
+        }
+
+        .modal-info {
+          padding: 15px;
+          height: calc(100vh - 200px);
+        }
+
+        .modal-info h3 {
+          font-size: 1.2rem;
+        }
+
+        .modal-specs li {
+          font-size: 0.8rem;
+          padding: 6px 0;
+          margin-bottom: 8px;
+        }
+
+        .modal-contact {
+          padding: 12px;
+        }
+
+        .modal-contact h4 {
+          font-size: 1rem;
+        }
+
+        .modal-contact p {
+          font-size: 0.85rem;
+        }
+
+        .whatsapp-btn {
+          font-size: 0.85rem;
+          padding: 10px 15px;
+        }
+      }
+
+      /* Custom scrollbar for modal info */
+      .modal-info::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .modal-info::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+
+      .modal-info::-webkit-scrollbar-thumb {
+        background: var(--secondary-color);
+        border-radius: 3px;
+      }
+
+      .modal-info::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
       }
 
       /* Product Tabs Styles */
@@ -2776,10 +2811,17 @@
           <div class="footer-section">
             <h3 data-translate="contactInfo">Informasi Kontak</h3>
             <p>
-              <i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/JL.+MBAH+DEMANG+SOSROREJO+NO.+14+BUDURAN+SIDOARJO">JL. MBAH DEMANG SOSROREJO
-              NO. 14 BUDURAN SIDOARJO</a>
+              <i class="fas fa-map-marker-alt"></i>
+              <a
+                href="https://www.google.com/maps/place/JL.+MBAH+DEMANG+SOSROREJO+NO.+14+BUDURAN+SIDOARJO"
+                >JL. MBAH DEMANG SOSROREJO NO. 14 BUDURAN SIDOARJO</a
+              >
             </p>
-            <p><i class="fas fa-phone"></i> <a href="tel:0318077382">031-8077382</a> | <a href="tel:082229329093">0822-2932-9093</a></p>
+            <p>
+              <i class="fas fa-phone"></i>
+              <a href="tel:0318077382">031-8077382</a> |
+              <a href="tel:082229329093">0822-2932-9093</a>
+            </p>
             <p>
               <i class="fas fa-envelope"></i>
               <a href="mailto:cvdeltamitrapersada@yahoo.com"
@@ -5476,23 +5518,6 @@
           },
         };
 
-        // Create fullscreen image viewer
-        const createFullscreenViewer = () => {
-          const fullscreenDiv = document.createElement("div");
-          fullscreenDiv.className = "image-fullscreen";
-          fullscreenDiv.innerHTML = `
-                  <span class="fullscreen-close">&times;</span>
-                  <img src="" alt="Full size product image">
-              `;
-          document.body.appendChild(fullscreenDiv);
-          return fullscreenDiv;
-        };
-
-        const fullscreenViewer = createFullscreenViewer();
-        const fullscreenImage = fullscreenViewer.querySelector("img");
-        const fullscreenClose =
-          fullscreenViewer.querySelector(".fullscreen-close");
-
         // Open modal and populate with product data
         document.querySelectorAll(".detail-btn").forEach((button) => {
           button.addEventListener("click", function () {
@@ -5514,14 +5539,6 @@
               modalImage.src = product.image;
               modalImage.alt = product.name;
 
-              // Add click event to modal image for fullscreen view
-              modalImage.style.cursor = "zoom-in";
-              modalImage.onclick = () => {
-                fullscreenImage.src = product.image;
-                fullscreenImage.alt = product.name;
-                fullscreenViewer.style.display = "flex";
-              };
-
               modal.style.display = "block";
 
               // Update WhatsApp link with product name
@@ -5537,17 +5554,6 @@
           modal.style.display = "none";
         });
 
-        // Close fullscreen viewer events
-        fullscreenClose.addEventListener("click", () => {
-          fullscreenViewer.style.display = "none";
-        });
-
-        fullscreenViewer.addEventListener("click", (e) => {
-          if (e.target === fullscreenViewer) {
-            fullscreenViewer.style.display = "none";
-          }
-        });
-
         // Close modal when clicking outside
         window.addEventListener("click", (event) => {
           if (event.target === modal) {
@@ -5555,16 +5561,6 @@
           }
         });
 
-        // ESC key to close modal and fullscreen
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") {
-            if (fullscreenViewer.style.display === "flex") {
-              fullscreenViewer.style.display = "none";
-            } else if (modal.style.display === "block") {
-              modal.style.display = "none";
-            }
-          }
-        });
       }
     </script>
   </body>
